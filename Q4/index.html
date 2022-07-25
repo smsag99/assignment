@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function reverseArray(source, dest){
+            for(let i = 0; i<source.length;i++){
+                dest[i] = source[source.length-i-1];
+            }
+        }
+        function reverseArrayinPlace(array){
+            let repeat = Math.floor(array.length/2); 
+            for(let i = 0; i<repeat;i++){
+                [array[i],array[array.length-1-i]] = [array[array.length-1-i],array[i]];
+            }    
+        }
+        let arr = [0,1,2,3,4,5,6,7,8,9,10];
+        console.log("Before reverse : " + arr);
+        let arr2 = [];
+        reverseArray(arr,arr2);
+        console.log("After Normal reverse : " + arr2);
+        reverseArrayinPlace(arr);
+        console.log("After Inplace reverse : " + arr);
+    </script>
+    
+</body>
+</html>
