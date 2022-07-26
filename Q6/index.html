@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let array = [2,3,4,5,6];
+        
+        function every1(arr,func){
+            for(item in arr)
+                if(!func(arr[item]))
+                    return false;
+            return true;
+        }
+        function every2(arr,func){
+            return !arr.some(item => !func(item))
+        }
+
+        console.log(every2(array,(item) =>  item >= 1 ));
+        //console.log(arr,(item) => { item >= 1 });
+
+    </script>
+</body>
+</html>

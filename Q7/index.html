@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        let array = [1,2,3,4];
+        let array2 = [];
+
+        function myMap(arr,func){
+            let arr2 = [];
+            for(item in arr)
+                arr2[item] = func(arr[item]);
+            return arr2;
+        }
+
+        function myFilter(arr,func){
+            let array = [];
+            for(item in arr){
+                if(func(arr[item]))
+                    array.push(arr[item]);
+            }
+            return array;
+        }
+
+        function myReduce(arr,func,a=0){
+            let sum = a;
+            for(item in arr){
+                sum = func(sum , arr[item]);
+            }
+            return sum;
+        }
+        
+        let res = myReduce(array,(a,b) =>  a+b ,0);
+        console.log(array)
+        console.log(res);
+
+    </script>
+</body>
+</html>
