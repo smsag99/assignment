@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function check(input1,input2){
+            if((input1)===(input2) && typeof(input1)!="object"){
+                    return true;
+            }else if(typeof(input1)=="object"){
+                if(Object.keys(input1).length !=Object.keys(input2).length) return false;
+                for(item in input1){
+                    if(!check(input1[item],input2[item])){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
+        let res = check ({},null);
+        console.log(res);
+    </script>
+</body>
+</html>
