@@ -12,11 +12,16 @@
         function filterArray(arr){
             let arr2 = [];
             for(item in arr)
-                if(typeof(arr[item])=="number")
+                if(typeof(arr[item])==="number")
                     arr2.push(arr[item]);
             return arr2;
         }
-        console.log(filterArray(array));
+
+        function filterArray2(arr){
+            return arr.filter(item => typeof(item)==="number")
+        }
+        
+        console.log(filterArray2(array));
     </script>
 </body>
 </html>
