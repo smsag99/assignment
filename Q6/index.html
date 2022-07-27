@@ -17,9 +17,11 @@
             return true;
         }
         function every2(arr,func){
-            return !arr.some(item => !func(item))
+            return !arr.some(function (item) {return !func(item);});
         }
-
+        function not(){
+            return !func(item);
+        }
         console.log(every2(array,(item) =>  item >= 1 ));
         //console.log(arr,(item) => { item >= 1 });
 
