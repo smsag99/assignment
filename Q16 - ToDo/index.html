@@ -76,7 +76,10 @@
             let resault = obj.sub.every(x=>x.isDone==true);
             doingdone(obj);
         }
-
+        function sortByDate(){
+            getFromStorage();
+            tasks.sort((a, b) => { new Date(a.Date) - new Date(b.Date) });
+        }
 
 
 
