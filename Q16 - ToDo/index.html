@@ -87,6 +87,17 @@
             setToStorage();
             console.log("update task is done");
         }
+        function allDone(parentObj){
+            let obj = readTaskByID(parentobj.id);
+            let resault = obj.sub.every(x=>x.isDone==true);
+            doingdone(obj);
+        }
+
+
+
+
+
+        
         //////run////
         localStorage.clear();
         let tasks = [];
