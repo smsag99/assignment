@@ -21,13 +21,16 @@
             return JSON.parse(str);
         }
         function addTask(obj){  
+            getFromStorage();
             obj.id = tasks.length;
             tasks.push(obj);
             setToStorage();
             console.log("add is done");
         }
         function deleteTaskByID(id){
+            getFromStorage();
             tasks[id] = {};
+            setToStorage();
             console.log("delete is done");
         }
         function readTaskByID(id){
@@ -39,14 +42,23 @@
         function updateTask(obj){
             getFromStorage();
             tasks[obj.id] =obj;
+            setToStorage();
             console.log("update task is done");
         }
-        function doingdone(obj,doForChild=false){
-            obj.isDone = true;
-            updateTask(obj);
+        function doingdone(parentObj,subObj = null){
+            // getFromStorage();    ////update has get
+            if(subObj ===null){
+                parentObj.isDone = true;
+                updateTask(parentObj);
+            }else {
+                subObj.isDone = true;
+                updateSub(parentObj,subObj);
+            }
+            setToStorage();
             console.log("doing Done is done");
         }
         function filterTasksByStatus(status){
+            getFromStorage();
             return tasks.filter(x=>x.isDone == status);
         }
         function searchByTittle(word){
@@ -54,13 +66,27 @@
             return tasks.filter(x=>x.title==word);
         }
         function addSub(parentObj,subObj){
+            // getFromStorage();      /////readtask has get
             let obj = readTaskByID(parentObj.id);
             subObj.parent = obj.id;
             subObj.id = obj.sub.length;
             obj.sub.push(subObj);
+            setToStorage();
         }
-        updateTask()
-
+        function updateSub(parentObj,subObj){
+            // getFromStorage();     ////read has get
+            let obj = readTaskByID(parentObj.id);
+            obj.sub[subObj.id] = subObj;
+            setToStorage();
+            console.log("update task is done");       
+        }
+        function deleteSub(parentObj,subObj){
+            // getFromStorage();     ////read has get
+            let obj = readTaskByID(parentObj.id);
+            obj.sub[subObj.id] = {};
+            setToStorage();
+            console.log("update task is done");
+        }
         //////run////
         localStorage.clear();
         let tasks = [];
