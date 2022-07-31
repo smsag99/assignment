@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getFromStorage(){
+            return stringToJSon(localStorage.getItem("arrayTasks"));
+        }
+        function setToStorage(){
+            localStorage.setItem("arrayTasks",jsonToString(tasks));
+        }
+        function jsonToString(obj){
+            return JSON.stringify(obj);
+        }
+        function stringToJSon(str){
+            return JSON.parse(str);
+        }
+        function addTask(obj){  
+            obj.id = tasks.length;
+            tasks.push(obj);
+            setToStorage();
+            console.log("add is done");
+        }
+        function deleteTaskByID(id){
+            tasks[id] = {};
+            console.log("delete is done");
+        }
+        function readTaskByID(id){
+            getFromStorage();
+            let obj =  tasks[id];
+            console.log("read is done");
+            return obj;
+        }
+        function updateTask(obj){
+            getFromStorage();
+            tasks[obj.id] =obj;
+            console.log("update task is done");
+        }
+        function doingdone(obj,doForChild=false){
+            obj.isDone = true;
+            updateTask(obj);
+            console.log("doing Done is done");
+        }
+        function filterTasksByStatus(status){
+            return tasks.filter(x=>x.isDone == status);
+        }
+        function searchByTittle(word){
+            getFromStorage();
+            return tasks.filter(x=>x.title==word);
+        }
+        function addSub(parentObj,subObj){
+            let obj = readTaskByID(parentObj.id);
+            subObj.parent = obj.id;
+            subObj.id = obj.sub.length;
+            obj.sub.push(subObj);
+        }
+        updateTask()
+
+        //////run////
+        localStorage.clear();
+        let tasks = [];
+        if(localStorage.arrayTasks == undefined || localStorage.arrayTasks ==null){
+            localStorage.setItem("arrayTasks",jsonToString(tasks));
+            console.log("initial array of tasks is done");
+        }
+        task1 = {
+            id: 0,
+            title: 'test1' ,
+            describtion: "",
+            isDone: false,
+            time: new Date(),
+            sub: []
+        };
+        task2 = {
+            id: 0,
+            title: `test2` ,
+            describtion: "",
+            isDone: false,
+            time: new Date(),
+            sub: []
+        };
+        task3 = {
+            id: 0,
+            title: `test3` ,
+            describtion: "",
+            isDone: false,
+            time: new Date(),
+            sub:[]
+        };
+        task4 = {
+            id: 0,
+            title: `test4` ,
+            describtion: "",
+            isDone: false,
+            time: new Date(),
+            sub:[]
+        };
+        subTask1 = {
+            id: 0,
+            title: `test4` ,
+            describtion: "",
+            isDone: false,
+            time: new Date(),
+        };
+        addTask(task1);
+        addTask(task2);
+        addTask(task3);
+        addTask(task4);
+        updateTask({
+            id: 2,
+            title: `test6` ,
+            describtion: "",
+            isDone: false,
+            time: new Date(),
+            parent:0
+        });
+        doingdone(2);
+        addSub(readTaskByID(3),subTask1)
+        console.log(readTaskByID(3));
+        console.log(sub in subTask1)
+        
+
+        // console.log(tasks);
+        //console.log(readTaskByID(2));
+        
+
+        
+
+
+
+
+
+
+    </script>
+</body>
+</html>
