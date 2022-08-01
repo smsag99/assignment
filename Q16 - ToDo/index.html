@@ -78,7 +78,7 @@
         }
         function sortByDate(){
             getFromStorage();
-            tasks.sort((a, b) => { new Date(a.Date) - new Date(b.Date) });
+            tasks.sort((a, b) => new Date(a.Date) - new Date(b.Date));
         }
 
 
